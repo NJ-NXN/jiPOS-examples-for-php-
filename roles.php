@@ -7,25 +7,63 @@
 </head>
 <body>
     <form action="" method="post">
-        <input type="text" name="Role ID" placeholder="Role ID">
-        <input type="text" name="Role Name" placeholder="Role Name">
+        <input type="text" name="role_name" placeholder="Role Name">
         <input type="submit" value="Submit">
     </form>
+
+    <?php
+    $conn = mysqli_connect("localhost","root","","jipos");
+
+    // Check connection
+    if (mysqli_connect_errno()) {
+    echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    exit();
+    }
+
+    if(isset($_POST['role_name'])){
+        $rolename = $_POST['role_name'];
+
+        $sql = "INSERT INTO roles (role_name) VALUES ('$rolename')";
+
+        if ($conn->query($sql) === TRUE) {
+         echo "New record created successfully";
+        } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+
+    }
+    ?>
     
     <table>
+        <thead>
         <tr>
             <th>Role ID</th>
             <th>Role Name</th>
         </tr>
-        <?php
-        if(isset($_POST['Role ID']) && isset($_POST['Role Name'])){
-            echo "<tr>";
-            echo "<td>".$_POST['Role ID']."</td>";
-            echo "<td>".$_POST['Role Name']."</td>";
-            echo "</tr>";
-        }
-        ?>
+        </thead>
+        <tbody>
+            <?php
+                $sql_query = "SELECT role_id, role_name FROM roles";
+                $result = $conn->query($sql_query);
+                
+                if ($result->num_rows > 0) {
+                    // output data of each row
+                    while($row = $result->fetch_assoc()) {
+                        echo '<tr>';
+                            echo '<td>' . $row["role_id"] . '</td>';
+                            echo '<td>' . $row["role_name"] . '</td>';
+                        echo '</tr>';
+                    }
+                } else {
+                echo "0 results";
+                }
+            ?>
+        </tbody>
     </table>
+
+    <?php 
+    $conn->close();
+    ?>
     
 </body>
 </html>
