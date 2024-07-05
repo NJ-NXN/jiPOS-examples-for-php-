@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roles</title>
+    <title>Item Categories</title>
 </head>
 <body>
     <form action="" method="post">
-        <input type="text" name="role_name" placeholder="Role Name">
+        <input type="text" name="cat_name" placeholder="Category Name">
         <input type="submit" value="Submit">
     </form>
 
@@ -20,10 +20,10 @@
     exit();
     }
 
-    if(isset($_POST['role_name'])){
-        $rolename = $_POST['role_name'];
+    if(isset($_POST['cat_name'])){
+        $catname = $_POST['cat_name'];
 
-        $sql = "INSERT INTO roles (role_name) VALUES ('$rolename')";
+        $sql = "INSERT INTO item_categories (cat_name) VALUES ('$catname')";
 
         if ($conn->query($sql) === TRUE) {
          echo "New record created successfully";
@@ -37,21 +37,21 @@
     <table>
         <thead>
         <tr>
-            <th>Role ID</th>
-            <th>Role Name</th>
+            <th>Category ID</th>
+            <th>Category Name</th>
         </tr>
         </thead>
         <tbody>
             <?php
-                $sql_query = "SELECT role_id, role_name FROM roles";
+                $sql_query = "SELECT cat_id, cat_name FROM item_categories";
                 $result = $conn->query($sql_query);
                 
                 if ($result->num_rows > 0) {
                     // output data of each row
                     while($row = $result->fetch_assoc()) {
                         echo '<tr>';
-                            echo '<td>' . $row["role_id"] . '</td>';
-                            echo '<td>' . $row["role_name"] . '</td>';
+                            echo '<td>' . $row["cat_id"] . '</td>';
+                            echo '<td>' . $row["cat_name"] . '</td>';
                         echo '</tr>';
                     }
                 } else {
