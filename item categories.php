@@ -4,13 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Item Categories</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+    rel="stylesheet" 
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
+    crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
+    crossorigin="anonymous">
+    </script>
 </head>
 <body>
-    <form action="" method="post">
-        <input type="text" name="cat_name" placeholder="Category Name">
-        <input type="submit" value="Submit">
+<div class="container d-flex justify-content-center align-items-center mt-5 mb-5">
+    <form action="" method="post" class="d-flex flex-column align-items-center" style="width: 50%;">
+    <div class="input-group">
+        <input type="text" name="cat_name" placeholder="Category Name" class="form-control">
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
     </form>
-
+</div>
     <?php
     $conn = mysqli_connect("localhost","root","","jipos");
 
@@ -34,11 +45,11 @@
     }
     ?>
     
-    <table>
+    <table class="table">
         <thead>
         <tr>
-            <th>Category ID</th>
-            <th>Category Name</th>
+            <th scope="col">Category ID</th>
+            <th scope="col">Category Name</th>
         </tr>
         </thead>
         <tbody>
