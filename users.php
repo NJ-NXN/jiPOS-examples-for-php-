@@ -58,6 +58,20 @@
 
     }
    
+    if(isset($_GET['id'])){
+        $userid = $_GET['id'];
+    
+        // sql to delete a record
+        $delete_query = "DELETE FROM users WHERE user_id=$userid";
+    
+        if ($conn->query($delete_query) === TRUE) {
+        echo "Record deleted successfully";
+    
+        } else {
+        echo "Error deleting record: " . $conn->error;
+        }
+    }
+
     ?>
     
     <table class="table">
@@ -88,6 +102,10 @@
                             echo '<td>' . $row["phone"] . '</td>';
                             echo '<td>' . $row["password"] . '</td>';
                             echo '<td>' . $row["role_id"] . '</td>';
+                            echo '<td>
+                                    <a href="users update.php?id=' . $row["user_id"] . '" class="btn btn-primary">Update</a>
+                                    <a href="users.php?id=' . $row["user_id"] . '" class="btn btn-danger">Delete</a>
+                                    </td>';
                         echo '</tr>';
                     }
                 } else {

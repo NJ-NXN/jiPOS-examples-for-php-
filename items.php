@@ -55,6 +55,20 @@
            }
 
     }
+
+    if(isset($_GET['id'])){
+        $itemid = $_GET['id'];
+    
+        // sql to delete a record
+        $delete_query = "DELETE FROM items WHERE item_id=$itemid";
+    
+        if ($conn->query($delete_query) === TRUE) {
+        echo "Record deleted successfully";
+    
+        } else {
+        echo "Error deleting record: " . $conn->error;
+        }
+    }
    
     ?>
     
@@ -68,6 +82,7 @@
             <th scope="col">Selling Price</th>
             <th scope="col">Stock Balance</th>
             <th scope="col">Category ID</th>
+            <th scope="col">Action</th>
         </tr>
         </thead>
         <tbody>
@@ -86,7 +101,11 @@
                             echo '<td>' . $row["selling_price"] . '</td>';
                             echo '<td>' . $row["stock_balance"] . '</td>';
                             echo '<td>' . $row["cat_id"] . '</td>';
-                        echo '</tr>';
+                            echo '<td>
+                                    <a href="item update.php?id=' . $row["item_id"] . '" class="btn btn-primary">Update</a>
+                                    <a href="items.php?id=' . $row["item_id"] . '" class="btn btn-danger">Delete</a>
+                                    </td>';
+                            echo '</tr>';
                     }
                 } else {
                 echo "0 results";

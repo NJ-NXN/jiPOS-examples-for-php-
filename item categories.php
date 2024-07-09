@@ -43,6 +43,21 @@
         }
 
     }
+
+    if(isset($_GET['id'])){
+        $itemcategories = $_GET['id'];
+    
+        // sql to delete a record
+        $delete_query = "DELETE FROM item_categories WHERE cat_id=$itemcategories";
+    
+        if ($conn->query($delete_query) === TRUE) {
+        echo "Record deleted successfully";
+    
+        } else {
+        echo "Error deleting record: " . $conn->error;
+        }
+    }
+
     ?>
     
     <table class="table">
@@ -63,6 +78,11 @@
                         echo '<tr>';
                             echo '<td>' . $row["cat_id"] . '</td>';
                             echo '<td>' . $row["cat_name"] . '</td>';
+                            echo '<td>
+                            <a href="item categories update.php?id=' . $row["cat_id"] . '" class="btn btn-primary">Update</a>
+                            <a href="item categories.php?id=' . $row["cat_id"] . '" class="btn btn-danger">Delete</a>
+                            </td>';
+
                         echo '</tr>';
                     }
                 } else {

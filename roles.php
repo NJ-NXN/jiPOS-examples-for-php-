@@ -43,6 +43,22 @@
         }
 
     }
+
+
+    if(isset($_GET['id'])){
+        $roleid = $_GET['id'];
+    
+        // sql to delete a record
+        $delete_query = "DELETE FROM roles WHERE role_id=$roleid";
+    
+        if ($conn->query($delete_query) === TRUE) {
+        echo "Record deleted successfully";
+    
+        } else {
+        echo "Error deleting record: " . $conn->error;
+        }
+    }
+
     ?>
     
     <table class="table">
@@ -63,6 +79,11 @@
                         echo '<tr>';
                             echo '<td>' . $row["role_id"] . '</td>';
                             echo '<td>' . $row["role_name"] . '</td>';
+                            echo '<td>
+                            <a href="roles update.php?id=' . $row["role_id"] . '" class="btn btn-primary">Update</a>
+                            <a href="roles.php?id=' . $row["role_id"] . '" class="btn btn-danger">Delete</a>
+                            </td>';
+
                         echo '</tr>';
                     }
                 } else {
